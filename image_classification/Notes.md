@@ -11,6 +11,7 @@ training set is a database of images called ImageNet
 ## Image Classifier
 
 reference: https://learn.ml5js.org/#/reference/image-classifier
+           https://github.com/ml5js/ml5-library/tree/main/examples/p5js/ImageClassification/ImageClassification
 
 在js中使用createImage, createP这些创建`<img>, <p></p>`这些DOM里的元素，将会显示在html内。相当于在js里编辑html的内容。
 
