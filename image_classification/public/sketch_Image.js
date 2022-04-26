@@ -1,13 +1,13 @@
 let mobilenet;
 let tower;
 
-function modelReady(){
+function modelReady() {
   console.log('Model is ready!!!');
   mobilenet.predict(tower, gotResults); //Make a prediction with the selected image and pass a callback function with gotResults
 }
 
-function gotResults(error, results){
-  if (error){
+function gotResults(error, results) {
+  if (error) {
     console.error(error);
   } else {
     console.log(results);
@@ -21,7 +21,7 @@ function gotResults(error, results){
   }
 }
 
-function imageReady(){
+function imageReady() {
   image(tower, 0, 0, width, height);
 }
 
@@ -30,7 +30,7 @@ function setup() {
 
   tower = createImg('IMG/Crystal Towers.png', imageReady); //createImg(DOM) in html page. Inside it means if png does not load successfully, show the content of function imageReady.
   tower.hide(); //hide the image
-  background(0); 
+  background(0);
 
   mobilenet = ml5.imageClassifier('MobileNet', modelReady); //generate a imageClassifier object. put an anonymous function called modelready.
   //telling the ML5 that I want to make an image classifier, and the first argument I am giving it as a string with the name of the model.
