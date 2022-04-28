@@ -1,7 +1,10 @@
-## Transfer learning
+## What is transfer learning?
+
 It is the process by which we take that pre-trained MobileNet model, and basically disconnect it from all those labels, and reconnect it to our labels.
 
+## What is resgression?
 
+Solving regression problems is one of the most common applications for machine learning models, especially in supervised machine learning. Algorithms are trained to understand the relationship between independent variables and an outcome or dependent variable. The model can then be leveraged to predict the outcome of new and unseen input data, or to fill a gap in missing data. 
 ## Classification
 
 MobileNet is a pre-trained model that was trained on a database of like 15 million images called ImageNet
