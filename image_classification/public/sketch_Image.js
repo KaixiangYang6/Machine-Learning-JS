@@ -32,7 +32,7 @@ function setup() {
   tower.hide(); //hide the image
   background(0);
 
-  mobilenet = ml5.imageClassifier('MobileNet', modelReady); //generate a imageClassifier object. put an anonymous function called modelready.
+  mobilenet = ml5.imageClassifier('MobileNet', modelReady); //generate a imageClassifier object. put an anonymous function called modelReady.
   //telling the ML5 that I want to make an image classifier, and the first argument I am giving it as a string with the name of the model.
   //promise is a way of handling asynchronous events that's slightly different but similar to callbacks. modelReady here is a callback methodology.
   //callback is a function to run once the model has been loaded.
