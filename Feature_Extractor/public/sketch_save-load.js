@@ -1,13 +1,21 @@
 let mobilenet;
-let predictor;
+let classifier;
 let video;
-let value = 0;
-let slider;
-let addButton;
+let labels = 'training your model / loading model';    //it can be empty, or words in it.
+let airpodsButton;
+let woodblockButton;
 let trainButton;
+let saveButton;
 
-function modelReady() {
+function modelReady() { //to show ModilenNet is ready.
     console.log('Model is ready!!!');
+    classifier.load('model.json', customModelReady);    //the .json and .bin file should be in the public folder.
+}
+
+function customModelReady(){    //to show Custom Model is ready.
+    console.log('Custom Model is ready!!!');
+    labels = 'model ready'; //change the text at the bottom of the canvas.
+    classifier.classify(gotResults);
 }
 
 function videoReady() {
@@ -18,7 +26,7 @@ function videoReady() {
 function whileTraining(lossValue) {
     if (lossValue == null) {
         console.log('Training Complete');
-        predictor.predict(gotResults);//when the training is complete, the actual process of matching the features to the labels, we need to classify.
+        classifier.classify(gotResults);//when the training is complete, the actual process of matching the features to the labels, we need to classify.
         // classify is geting a prediction for that image
     } else {
         console.log(lossValue);
@@ -29,39 +37,44 @@ function gotResults(error, result) {
     if (error) {
         console.error(error);
     } else {
-        console.log(result); //check the log shown in the web,
-        value = result.value; //use the property directly
+        // console.log(result); //check the log shown in the web,
+        labels = result[0].label; //following the name of the log
 
-        predictor.predict(gotResults); //predicting twice forms a loop.
+        classifier.classify(gotResults); //predicting twice forms a loop.
     }
 }
 
 
 function setup() {
-    createCanvas(640, 530);
+    createCanvas(640, 540);
 
     video = createCapture(VIDEO); //createImg(DOM) in html page. Inside it means if png does not load successfully, show the content of function imageReady.
     video.hide(); //hide the image
     background(0);
 
     mobilenet = ml5.featureExtractor('MobileNet', modelReady); //Extract the already learned features from MobileNet
-    predictor = mobilenet.regression(video, videoReady)  //Create a new regression
+    classifier = mobilenet.classification(video, videoReady)  //Create a new classifier using those features and with a video element. Give labels.
 
-    slider = createSlider(0, 1, 0.5, 0.01);
-    // slider.input(function(){
-    // console.log(slider.value());
-    // })
+    //add buttons to label customized images.
+    airpodsButton = createButton('airpods');
+    airpodsButton.mousePressed(function () {//when I press the button the functin will be executed
+        classifier.addImage('airpods')  //Add a new image with a label to the classifier which is ???????
+    })
 
-    addButton = createButton('add example image');
-    addButton.mousePressed(function () {
-        //assign this image's feature to this number
-        predictor.addImage(slider.value());// .addImage(): When using the classifier this can be strings or numbers. For a regressor, this needs to be a number.
-    });
+    woodblockButton = createButton('woodblock');
+    woodblockButton.mousePressed(function () {//when I press the button the functin will be executed
+        classifier.addImage('woodblock')
+    })
 
     trainButton = createButton('train');
     trainButton.mousePressed(function () {
-        predictor.train(whileTraining);    //Retrain the network, which is map the labels to the features extracted from the video????
-    });
+        classifier.train(whileTraining);    //Retrain the network, which is map the labels to the features extracted from the video????
+    })
+
+    saveButton = createButton('save');
+    saveButton.mousePressed(function () {
+        classifier.save();    //save the model trained right now, and download a json and a bin file to the local Downloads folder.
+    })
 
 }
 //creating an image classifier with a MobileNet model. It is going to take some time for it to load that model. This is not a small thing.
@@ -70,12 +83,7 @@ function draw() {
     background(0);
     image(video, 0, 0);//display the video on canvas
 
-    noStroke();
-    fill('#156156');
-    rect(value * width, height - 60, 80, 10);
-
-
     fill(255);
     textSize(32);
-    text(value, 10, height - 20);
+    text(labels, 10, height - 20);
 }

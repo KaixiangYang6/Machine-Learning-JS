@@ -24,7 +24,7 @@ function whileTraining(lossValue) {
         console.log(lossValue);
     }
 }
-
+////////////////////bool,  array
 function gotResults(error, result) {
     if (error) {
         console.error(error);
@@ -49,7 +49,7 @@ function setup() {
 
     airpodsButton = createButton('airpods');
     airpodsButton.mousePressed(function () {//when I press the button the functin will be executed
-        classifier.addImage('airpods')  //Add a new image with a label to the classifier which is ???????
+        classifier.addImage('airpods')  //Add a new image with a label to the classifier???????
     })
 
     woodblockButton = createButton('woodblock');

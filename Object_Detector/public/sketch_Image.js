@@ -9,12 +9,27 @@
 
 let img;
 let detector;
+let imgScale;
 
 //preload function allows me to load images and pro-trained models without any callbacks,
 //and everything is ready to go once I get to the setup function
 function preload() {
-  img = loadImage('IMG/cat_dog.jpeg');
-  detector = ml5.objectDetector('cocossd');//Models available are 'cocossd', 'yolo'
+  img = loadImage('IMG/cat-dog3.jpeg');
+
+  // imgScale = image(img, 0, 0, 640, 480);
+  detector = ml5.objectDetector('cocossd');//Create a ObjectDetector method. Models available are 'cocossd', 'yolo'
+}
+
+function setup() {
+  createCanvas(img.width, img.height);
+  // console.log(detector);
+  //the image is not the object detected
+
+  //this function is a copy of the original data 
+  image(img, 0, 0, width, height);
+  img.resize(width, height);
+  // imgScale = image(img, 0, 0, width, height);
+  detector.detect(img, gotDetections);
 }
 
 function gotDetections(error, results) {
@@ -25,21 +40,16 @@ function gotDetections(error, results) {
   //unfold the results array
   for (let i = 0; i < results.length; i++) {
     let object = results[i];
+
     stroke(0, 255, 0);
     strokeWeight(4);
     noFill();
     rect(object.x, object.y, object.width, object.height);  //give every object of the array a frame
+
     //每个图形之前设置描边填色等等
     noStroke();
     fill(255);
     textSize(24);
     text(object.label, object.x + 10, object.y + 24);
   }
-}
-
-function setup() {
-  createCanvas(640, 480);
-  // console.log(detector);
-  image(img, 0, 0, width, height);
-  detector.detect(img, gotDetections);
 }

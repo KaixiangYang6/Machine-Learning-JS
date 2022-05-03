@@ -68,4 +68,11 @@ function draw() {
 对视频/摄像头进行识别分类的语句 `createCapture(VIDEO)`
 
 >Q: .classif和.predict的区别是什么？去哪里找reference？
->global variable labels = ''的作用？
+
+>A: https://github.com/ml5js/ml5-library/issues/192 
+>The predict() method in imageClassifier('MobileNet') was inherit from tf.js `Model.predict`. For featureExtractor('MobileNet') I think the choice was to make the method call explicit to what the extractor was set to do. As a classifier, it should classify() and as a regressor it should predict(). It might be confusing to have different use cases for predict(). I think we should we use classify() everywhere it's specifically "classification" and predict() for regressions.
+
+
+>Q: global variable labels = ''的作用？
+
+>A: according to the actural name of results shown in the web console, we can know in advance that this variable will be used as a character. 

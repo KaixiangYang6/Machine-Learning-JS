@@ -44,8 +44,9 @@ function setup() {
     video.hide(); //hide the image
     background(0);
 
+    // predictor = mobilenet.regression(video, videoReady);
     mobilenet = ml5.featureExtractor('MobileNet', modelReady); //Extract the already learned features from MobileNet
-    predictor = mobilenet.regression(video, videoReady)  //Create a new regression
+    predictor = mobilenet.regression(video, videoReady);  //Create a new regression
 
     slider = createSlider(0, 1, 0.5, 0.01);
     // slider.input(function(){

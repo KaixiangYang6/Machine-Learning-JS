@@ -34,16 +34,17 @@ function changeBG() {
   background(val);
 }
 ```
-Creates a <button></button> element in the DOM. Use .size() to set the display size of the button. Use .mousePressed() to specify behavior on press.
 
->Q: what is the meaning of classifier in the sentence `classifier = mobilenet.classification(video, videoReady)`? The variable classifier means the classification results of features extracted by the extractor or something else? The combination of labels?
+Creates a <button></button> element in the DOM. Use .size() to set the display size of the button. Use .mousePressed() to specify behavior when press the button.
 
-`classifier.addImage('airpods')` means add a new image with a label. This is because when you keep pressing the button, you are holding the item belong to the label. So, this is a step that you give the label to the item.
+>Q: what is the meaning of classifier in the sentence `classifier = mobilenet.classification(video, videoReady)`? The variable `classifier` means the classification results of features extracted by the extractor or something else? The combination of labels?
 
+`classifier.addImage('airpods')` means add a new image with a label. This is because when you keep pressing the button, you are holding the item belong to the label. So, this is a step that you give the label to the item. 
 
-whileTraining is a function that is running over and over again during the training process. It is going to report back to me information about the training process. The information is something called `lossValue`/`cost`. The loss function is calculating the error误差. If the result of comparision is consistant, then the lossValue will be 0.
+whileTraining is a function that is running over and over again during the training process. It is going to report back to me information about the training process. The information is something called `lossValue`/`cost`. The loss function is calculating the error误差. If the result of comparision is consistant, then the lossValue will be 0. During the training process the lossVaule should be smaller and smaller
 
 >Q: `classifier.classify(gotResults)`括号里应该是`error, result`，这两个是结果变量还是开始参与的变量，为什么gotResults的自定义变量放到括号里就可以直接充当原始的`error, result`
+
 ```js
 function gotResults(error, result) {
     if (error) {
@@ -57,7 +58,6 @@ function gotResults(error, result) {
 ```
 
 The two button can be fill with `smile`, `sad` that any kind of labels as long as the labels matching the images.
-
 
 >Q: Occasionally, after pressing train button, there will be a warning saying `Uncaught (in promise) Error: Batch size is 0 or NaN. Please choose a non-zero fraction.`
 
@@ -99,3 +99,21 @@ function gotResults(error, result) {
     }
 }
 ```
+
+
+
+.save() save the model trained just now, and download a `.json` and a `.bin` file to the local Downloads folder.
+```js
+
+    saveButton = createButton('save');
+    saveButton.mousePressed(function () {
+        classifier.save();    //save the model trained just now, and download a json and a bin file to the local Downloads folder.
+    })
+
+```
+
+The configuration is saved in the json file. The weight data is save in the bin file. It is a binary format file.
+
+We can train our own classification database by labeling customized names to the images given by ourselves as well as regression database. save the model to the local folder, and load it when we need. We can also share the model files to friends.
+
+>Q: why warn `Error: pixels passed to tf.browser.fromPixels() can not be null`? and suddenly returns to normal。
