@@ -19,6 +19,7 @@ Feature Extractor reference: <https://learn.ml5js.org/#/reference/feature-extrac
 
 
 `createButton()` reference: <https://p5js.org/reference/#/p5/createButton>
+
 ```js
 let button;
 function setup() {
@@ -35,13 +36,14 @@ function changeBG() {
 }
 ```
 
-Creates a <button></button> element in the DOM. Use .size() to set the display size of the button. Use .mousePressed() to specify behavior when press the button.
+Creates a <button></button> element in the DOM. Use `.size()` to set the display size of the button. Use `.mousePressed()` to specify behavior when press the button.
 
->Q: what is the meaning of classifier in the sentence `classifier = mobilenet.classification(video, videoReady)`? The variable `classifier` means the classification results of features extracted by the extractor or something else? The combination of labels?
+>Q: what is the meaning of classifier in the sentence `classifier = mobilenet.classification(video, videoReady)`? 
+>A: The variable `classifier` means the classification results of features extracted by the extractor or something else? The combination of labels?
 
 `classifier.addImage('airpods')` means add a new image with a label. This is because when you keep pressing the button, you are holding the item belong to the label. So, this is a step that you give the label to the item. 
 
-whileTraining is a function that is running over and over again during the training process. It is going to report back to me information about the training process. The information is something called `lossValue`/`cost`. The loss function is calculating the error误差. If the result of comparision is consistant, then the lossValue will be 0. During the training process the lossVaule should be smaller and smaller
+`whileTraining` is a function that is running over and over again during the training process. It is going to report back to me information about the training process. The information is something called `lossValue`/`cost`. The loss function is calculating the error误差. If the result of comparision is consistant, then the lossValue will be 0. During the training process the lossVaule should be smaller and smaller
 
 >Q: `classifier.classify(gotResults)`括号里应该是`error, result`，这两个是结果变量还是开始参与的变量，为什么gotResults的自定义变量放到括号里就可以直接充当原始的`error, result`
 
@@ -70,7 +72,7 @@ If I want to save the model that I have trained, and reload that in the future, 
 where is the information about predict?
 I no longer classify and get a label. I am predicting and getting a nnumber.
 
-当`console.log`给的结果没有序号时，这就不是数组。直接使用它的属性property就可以，例如regression中
+当浏览器的`console.log`给的结果没有序号时，这就不是数组。直接使用它的属性property就可以，例如regression中
 
 ```js
 function gotResults(error, result) {
@@ -100,9 +102,8 @@ function gotResults(error, result) {
 }
 ```
 
+`.save()` save the model trained just now, and download a `.json` and a `.bin` file to the local Downloads folder.
 
-
-.save() save the model trained just now, and download a `.json` and a `.bin` file to the local Downloads folder.
 ```js
 
     saveButton = createButton('save');
