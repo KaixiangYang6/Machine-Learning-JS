@@ -9,7 +9,7 @@ let saveButton;
 
 function modelReady() { //to show ModilenNet is ready.
     console.log('Model is ready!!!');
-    classifier.load('model.json', customModelReady);    //the .json and .bin file should be in the public folder.
+    // classifier.load('model.json', customModelReady);    //the .json and .bin file should be in the public folder.
 }
 
 function customModelReady(){    //to show Custom Model is ready.
@@ -20,6 +20,7 @@ function customModelReady(){    //to show Custom Model is ready.
 
 function videoReady() {
     console.log('Video is ready!!!');
+    classifier.load('model.json', customModelReady);    //be sure the camera load before the model load.
 }
 
 //this function whileTraining is a function that's kind of run over and over during the training process, and it's going to report back to me information about the training process.
@@ -53,17 +54,17 @@ function setup() {
     background(0);
 
     mobilenet = ml5.featureExtractor('MobileNet', modelReady); //Extract the already learned features from MobileNet
-    classifier = mobilenet.classification(video, videoReady)  //Create a new classifier using those features and with a video element. Give labels.
+    classifier = mobilenet.classification(video, videoReady);  //Create a new classifier using those features and with a video element. Give labels.
 
     //add buttons to label customized images.
     airpodsButton = createButton('airpods');
     airpodsButton.mousePressed(function () {//when I press the button the functin will be executed
-        classifier.addImage('airpods')  //Add a new image with a label to the classifier which is ???????
+        classifier.addImage('airpods');  //Add a new image with a label to the classifier which is ???????
     })
 
     woodblockButton = createButton('woodblock');
     woodblockButton.mousePressed(function () {//when I press the button the functin will be executed
-        classifier.addImage('woodblock')
+        classifier.addImage('woodblock');
     })
 
     trainButton = createButton('train');

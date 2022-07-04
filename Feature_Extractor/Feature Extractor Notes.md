@@ -4,7 +4,7 @@ It is the process by which we take that pre-trained MobileNet model, and basical
 
 ## What is resgression?
 
-Solving regression problems is one of the most common applications for machine learning models, especially in supervised machine learning. Algorithms are trained to understand the relationship between independent variables and an outcome or dependent variable. The model can then be leveraged to predict the outcome of new and unseen input data, or to fill a gap in missing data. 
+Solving regression problems is one of the most common applications for machine learning models, especially in supervised machine learning. Algorithms are trained to understand the relationship between independent variables and an outcome or dependent variable. The model can then be leveraged to predict the outcome of new and unseen input data, or to fill a gap in missing data.
 ## Classification
 
 MobileNet is a pre-trained model that was trained on a database of like 15 million images called ImageNet
@@ -118,3 +118,24 @@ The configuration is saved in the json file. The weight data is save in the bin 
 We can train our own classification database by labeling customized names to the images given by ourselves as well as regression database. save the model to the local folder, and load it when we need. We can also share the model files to friends.
 
 >Q: why warn `Error: pixels passed to tf.browser.fromPixels() can not be null`? and suddenly returns to normal。
+
+>A: be sure that **the camera loads before the custom model loads**. The solution for this problem are the following steps:
+
+>Step 1:
+Copy and comment the clasiffier.load inside the modelReady function
+
+```js
+function modelReady() {
+console.log('Model is ready!!!');
+//classifier.load('model.json', customModelReady);
+}
+```
+
+>Step2:
+Paste the clasiffier.load inside the videoReady function
+
+```js
+function videoReady() {
+console.log('Video is ready!!!');
+classifier.load('model.json', customModelReady);
+```
