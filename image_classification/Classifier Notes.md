@@ -60,7 +60,7 @@ function draw() {
   //background(0);
 }
 ```
->A: imageReady()里的image()是P5.js库的语句，用于显示图片到canvas上，tower.hide()是将createImg创建的<img>DOM标签在setup阶段隐藏起来
+>A: imageReady()里的image()是P5.js库的语句，用于显示图片到canvas上，tower.hide()是将createImg创建的`<img>`DOM标签在setup阶段隐藏起来
 
 
 对视频/摄像头进行识别分类的语句 `createCapture(VIDEO)`
