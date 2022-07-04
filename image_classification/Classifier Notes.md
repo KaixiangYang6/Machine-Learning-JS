@@ -42,7 +42,7 @@ tower = createImg('IMG/Crystal Towers.png', imageReady); //createImg(DOM) in htm
 
   
   
->Q:为什么tower = createImg('IMG/Crystal Towers.png', imageReady); 里的imageReady执行完它自己的image()后，hide()，不会将image()隐藏起来？tower.hide()是只对tower进行隐藏，tower里面的image()不受影响？
+>Q: 为什么tower = createImg('IMG/Crystal Towers.png', imageReady); 里的imageReady执行完它自己的image()后，hide()，不会将image()隐藏起来？tower.hide()是只对tower进行隐藏，tower里面的image()不受影响？
 
 ```js
 function imageReady(){
@@ -62,7 +62,7 @@ function draw() {
   //background(0);
 }
 ```
-
+>A: imageReady()里的image()是P5.js库的语句，用于显示图片到canvas上，tower.hide()是将createImg创建的<img>DOM标签在setup阶段隐藏起来
 
 
 对视频/摄像头进行识别分类的语句 `createCapture(VIDEO)`
